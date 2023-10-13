@@ -26,7 +26,7 @@ public class UpdateCinemaCommandHandler : IRequestHandler<UpdateCinemaCommand, C
         
         var cinema = _mapper.Map<Domain.Entities.Cinema>(request);
 
-        await _cinemaRepository.UdateAsync(cinema);
+        await _cinemaRepository.UpdateAsync(cinema);
 
         var CinemaDto = _mapper.Map<CinemaDto>(cinema);
         

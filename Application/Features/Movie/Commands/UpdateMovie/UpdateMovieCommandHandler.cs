@@ -26,7 +26,7 @@ public class UpdateMovieCommandHandler : IRequestHandler<UpdateMovieCommand, Mov
         
         var movie = _mapper.Map<Domain.Entities.Movie>(request);
 
-        await _movieRepository.UdateAsync(movie);
+        await _movieRepository.UpdateAsync(movie);
 
         var movieDto = _mapper.Map<MovieDto>(movie);
         

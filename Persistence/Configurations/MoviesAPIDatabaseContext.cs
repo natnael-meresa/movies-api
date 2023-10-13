@@ -6,12 +6,21 @@ namespace Persistence.Configureations;
 
 public class MoviesAPIDatabaseContext : DbContext
 {
-    public MoviesAPIDatabaseContext(DbContextOptions<MoviesAPIDatabaseContext> options) : base(options)
-    {}
 
-    public DbSet<Movie>? Movies {get; set;}
-    public DbSet<Cinema>? Cinemas {get; set;}
+    public MoviesAPIDatabaseContext()
+    {
 
+    }
+    // public MoviesAPIDatabaseContext(DbContextOptions<MoviesAPIDatabaseContext> options) : base(options)
+    // {
+
+    // }
+
+    public DbSet<Movie> Movies { get; set; } = null!;
+    public DbSet<Cinema> Cinemas { get; set; } = null!;
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseNpgsql("MoviesDatabaseConnectionString");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MoviesAPIDatabaseContext).Assembly);
@@ -26,7 +35,7 @@ public class MoviesAPIDatabaseContext : DbContext
             entry.Entity.LastModifiedDate = DateTime.Now;
             entry.Entity.LastModifiedBy = "admin";
 
-            if (entry.State == EntityState.Added) 
+            if (entry.State == EntityState.Added)
             {
                 entry.Entity.CreatedBy = "admin";
                 entry.Entity.CreatedDate = DateTime.Now;
@@ -35,4 +44,6 @@ public class MoviesAPIDatabaseContext : DbContext
 
         return base.SaveChangesAsync(cancellationToken);
     }
+
+
 }
