@@ -7,14 +7,11 @@ namespace Persistence.Configureations;
 public class MoviesAPIDatabaseContext : DbContext
 {
 
-    public MoviesAPIDatabaseContext()
+
+    public MoviesAPIDatabaseContext(DbContextOptions<MoviesAPIDatabaseContext> options) : base(options)
     {
 
     }
-    // public MoviesAPIDatabaseContext(DbContextOptions<MoviesAPIDatabaseContext> options) : base(options)
-    // {
-
-    // }
 
     public DbSet<Movie> Movies { get; set; } = null!;
     public DbSet<Cinema> Cinemas { get; set; } = null!;
