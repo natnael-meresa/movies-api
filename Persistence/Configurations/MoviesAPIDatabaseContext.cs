@@ -20,7 +20,7 @@ public class MoviesAPIDatabaseContext : DbContext
     public DbSet<Cinema> Cinemas { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseNpgsql("MoviesDatabaseConnectionString");
+        => options.UseNpgsql("User ID=postgres;Password=postgres;Server=localhost;Port=5432;Database=movies;Integrated Security=true;Pooling=true;");
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MoviesAPIDatabaseContext).Assembly);
